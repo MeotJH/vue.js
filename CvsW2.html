@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="test1">{{ fullName }}</div>
+        <br>
+        <div id="test2">{{ fullName }}</div>
+
+        <script>
+
+            var vm = new Vue({
+            el: '#test1',
+            data: {
+                firstName: 'Foo',
+                lastName: 'Bar',
+                fullName: 'Foo Bar'
+            },
+            watch: {
+                firstName: function (val) {
+                this.fullName = val + ' ' + this.lastName
+                },
+                lastName: function (val) {
+                this.fullName = this.firstName + ' ' + val
+                }
+            }
+            })
+
+
+            var vm = new Vue({
+            el: '#test2',
+            data: {
+                firstName: 'Foo',
+                lastName: 'Bar'
+            },
+            computed: {
+                fullName: function () {
+                return this.firstName + ' ' + this.lastName
+                }
+            }
+            })
+            /*
+             * vue.js 다큐먼트에서 watch와 computed의 명령과 선언형으로 설명하며 선언형이 코드 단축적 측면에서 유리하다고 설명하면서 든 예시인데
+             * #test1쪽 스크립트를 보면 그냥 {{ fullName }}이 데이터로 선언되어 있어서 동기적으로 바뀔게 딱히 없다고 생각되는데 뭐하러 watch를 사용한건지 여쭈어봐야겠다.
+             */
+        </script>
+    </body>
+</html>

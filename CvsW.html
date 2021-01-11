@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+
+        <div id="app">
+          <h1>{{ count }}</h1><br>
+          <!--{{ calculated }} -->
+          <button @click="count = count+ 2"> 계산하기</button>
+        </div>
+
+    </body>
+    <script>
+        new Vue({
+	el: "#app",
+  data: {
+    count: 0,
+  },
+  computed: {
+    calculated: function () {
+    	if(this.count === 10) {
+      	alert('값이 10을 넘었습니다.')
+      }
+    }
+  },
+  watch: {
+    count: function (newVal) {
+      if(newVal > 20) {
+      	alert('값이 20을 넘었습니다.')
+        this.count = 0
+      }
+    }
+  }
+})
+/* computed 와 watch의 차이
+
+1.
+Computed 는 계산된 값을 출력하는 용도의 문법
+(메소드와 비슷하지만 캐시값이 쌓인다는 점에서 메소드와는 다르다 = > 이전의 값과 같은 값을 표현하는 컴퓨티드를 사용하면 캐쉬에 값이 저장되어 있어서 비용을 줄일 수 있다는 뜻)
+Watch는 어떤 조건이 되었을 때 함수를 실행시키기 위한 Trigger 문법
+
+2. 명령형 프로그래밍( watch ) vs 선언형 프로그래밍 ( computed )
+   명령형 프로그래밍은 "어떻게(How)해"의 주요한 방식이라면,
+   선언형 프로그래밍은 "무엇을(What)해"의 방식이다.
+
+결론
+
+   => 값의 계산을 위한 선언형 프로그래밍을 쓰려면 Computed를 사용하고
+   => 해당 값에 따른 실시간 반응이 필요하다면 Watch를 사용하기
+   
+   모두 watch를 쓰면 안되나?
+   안된다. 왜냐하면 명령형 보다 선언형이 코드가 간결하기 떄문에 둘을 구별해서 사용하는 습관을 들여야함
+
+
+*/
+    </script>
+    
+</html>
+
